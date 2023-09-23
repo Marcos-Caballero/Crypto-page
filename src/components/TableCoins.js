@@ -1,9 +1,14 @@
 import React from "react";
 import CoinRow from "./CoinRows";
 
-const headers = ['#', 'Moneda', 'Precio', 'Porcentaje de cambio', '24 movimientos']
+const headers = ['#', 'Moneda', 'Precio actual', 'Tasa de cambio', 'Volumen ultimas 24h']
 
-const TableCoins = ({coins}) => {
+const TableCoins = ({coins, search}) => {
+/* Aqui está el buscador de criptos */
+    const searchBar = coins.filter((coin) =>
+        coin.name.toLowerCase().includes(search.toLowerCase()) | coin.symbol.toLowerCase().includes(search.toLowerCase())
+        );
+/* Aqui va la estructura de las columnas */
     return (
         <table className="table table-dark mt-4 table-hover">
             <thead>
@@ -18,7 +23,7 @@ const TableCoins = ({coins}) => {
                 </tr>
             </thead>
             <tbody>
-                {coins.map((coin, index) => (
+                {searchBar.map((coin, index) => (
                     <CoinRow coin={coin} key={index} index={index + 1} />
                 ))}
             </tbody>
