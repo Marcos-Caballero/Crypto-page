@@ -1,5 +1,7 @@
 import React from 'react'
-import StarCheckbox from './StarCheckbox';
+import StarCheckbox from './StarCheckbox'; /* Trayendo la estrellita */
+import CryptoChart from './CryptoChart';
+
 /* Aqui va la estructura de las filas de la tabla */
 const CoinRow = ({coin, index}) => {
     console.log(coin, index)
@@ -10,7 +12,7 @@ const CoinRow = ({coin, index}) => {
                 <span style={{ marginLeft: '5px' }}>{index}</span>
             </td>
             <td>
-                <img src={coin.image} alt={coin.name} style={{maxWidth: '5%'}} className='me-4 imf-fluid'></img>
+                <img src={coin.image} alt={coin.name} style={{maxWidth: '5%', minWidth: '5%'}} className='me-4 imf-fluid'></img>
                 <span>{coin.name}</span>
                 <span className='ms-3 text-secondary text-uppercase'>{coin.symbol}</span>
                 </td>
@@ -19,6 +21,9 @@ const CoinRow = ({coin, index}) => {
                 {coin.price_change_percentage_24h}
             </td>
             <td>{coin.total_volume}</td>
+            {/* <td style={{ maxWidth: '150px', maxHeight: '100px'}}>
+            <CryptoChart sparklineData={coin.sparkline_in_7d.price} />
+            </td> */}
         </tr>
     )
 }

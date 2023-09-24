@@ -1,67 +1,53 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Chart from 'chart.js/auto';
-import axios from 'axios';
+import React, { useEffect, useRef } from 'react';
+import { Line, Chart } from 'react-chartjs-2';
 
-function CryptoChart({ coinId }) {
-  const chartRef = useRef(null);
-  const [historicalData, setHistoricalData] = useState([]);
+function CryptoChart({ sparklineData }) {
+    const chartRef = useRef(null);
 
-  useEffect(() => {
-    // Obtener datos históricos de la moneda
-    const getHistoricalData = async () => {
-      try {
-        const res = await axios.get(
-          `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=7`
-        );
-        setHistoricalData(res.data.prices);
-      } catch (error) {
-        console.error('Error al obtener datos históricos:', error);
-      }
-    };
+    useEffect(() => {
+        if (chartRef.current) {
+        // Destruye el gráfico anterior si existe
+        chartRef.current.destroy();
+        }
 
-    getHistoricalData();
-  }, [coinId]);
-
-  useEffect(() => {
-    if (chartRef.current && historicalData) {
-      const ctx = chartRef.current.getContext('2d');
-
-      new Chart(ctx, {
+        // Crea el nuevo gráfico
+        const ctx = document.getElementById('chart-canvas');
+        chartRef.current = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: historicalData.map((entry) => new Date(entry[0]).toLocaleDateString()), // Array de fechas
-          datasets: [
+            labels: sparklineData.map((_, index) => index.toString()),
+            datasets: [
             {
-              label: 'Variación de Precio',
-              data: historicalData.map((entry) => entry[1]), // Array de precios
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1,
-              fill: false,
+                label: 'Precio',
+                data: sparklineData,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: false,
             },
-          ],
+            ],
         },
         options: {
-          scales: {
+            scales: {
             x: {
-              type: 'time',
-              time: {
-                unit: 'day', // Ajusta la unidad de tiempo según tus datos.
-              },
+                type: 'category', // Establece el tipo de escala como "category"
+                labels: sparklineData.map((_, index) => index.toString()), // Utiliza las etiquetas del eje X del data
+                beginAtZero: true, // Comienza en cero en el eje X (ajusta según tus necesidades)
             },
             y: {
-              beginAtZero: false,
+                beginAtZero: false,
+                display: false, // Oculta las etiquetas del eje Y
             },
-          },
+            },
+            plugins: {
+            legend: {
+                display: false, // Oculta la leyenda
+            },
+            },
         },
-      });
-    }
-  }, [historicalData]);
+        });
+    }, [sparklineData]);
 
-  return (
-    <div>
-      <canvas ref={chartRef} width="400" height="200"></canvas>
-    </div>
-  );
+    return <canvas id="chart-canvas" />;
 }
 
 export default CryptoChart;

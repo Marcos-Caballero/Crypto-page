@@ -2,8 +2,6 @@ import {useEffect, useState} from 'react'
 import './App.css';
 import axios from 'axios';
 import TableCoins from './components/TableCoins'; // Importando la tabla
-/* import CryptoChart from './components/CryptoChart'; // Importando las graficas */
-
 
 function App() {
   const [coins, setCoins] = useState([])
@@ -11,7 +9,7 @@ function App() {
 /* Llamando la API */
   const getData = async () => {
     try {
-      const res = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en'
+      const res = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en'
       );
       setCoins(res.data);
       console.log(res.data);
@@ -34,7 +32,6 @@ function App() {
       />
       {coins.map((coin) => (
           <div key={coin.id} className="coin-container">
-            <h2>{coin.name}</h2>
             </div>
         ))}
       </div>
