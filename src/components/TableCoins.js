@@ -1,7 +1,7 @@
 import React from "react";
 import CoinRow from "./CoinRows";
 
-const headers = ['#', 'Moneda', 'Precio actual', 'Tasa de cambio', 'Volumen ultimas 24h']
+const headers = ['#', 'Moneda', 'Precio actual', 'Tasa de cambio', 'Volumen ultimas 24h', 'Grafico']
 
 const TableCoins = ({coins, search}) => {
 /* Aqui está el buscador de criptos */
@@ -18,8 +18,6 @@ const TableCoins = ({coins, search}) => {
                         <td>{header}</td>
                     ))
                     }
-                </tr>
-                <tr>
                 </tr>
             </thead>
             <tbody>

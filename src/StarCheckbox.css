@@ -1,0 +1,18 @@
+.star-checkbox {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .star-checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+  .star-checkbox .star {
+    font-size: 24px;
+    color: #ddd; /* Color de la estrella desmarcada */
+  }
+  
+  .star-checkbox.checked .star {
+    color: yellow; /* Color de la estrella marcada */
+  }
+  

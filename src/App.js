@@ -1,7 +1,9 @@
 import {useEffect, useState} from 'react'
 import './App.css';
 import axios from 'axios';
-import TableCoins from './components/TableCoins';
+import TableCoins from './components/TableCoins'; // Importando la tabla
+/* import CryptoChart from './components/CryptoChart'; // Importando las graficas */
+
 
 function App() {
   const [coins, setCoins] = useState([])
@@ -26,8 +28,15 @@ function App() {
     <div className="container">
       <div className='row'>
       <h1 className='text-center'>Cripto Mercado v0.7</h1>
-      <input type='text' placeholder='¡Busca tu criptomoneda!' className='form-control bg-dark text-secondary border-0 mt-4 text-center' autoFocus onChange={e => setSearch(e.target.value)}/>
-      <TableCoins coins={coins} search={search} />
+      <input type='text' placeholder='¡Busca tu criptomoneda!' className='form-control bg-dark text-secondary border-0 mt-4 text-center' autoFocus onChange={e => setSearch(e.target.value)}
+      />
+      <TableCoins coins={coins} search={search} 
+      />
+      {coins.map((coin) => (
+          <div key={coin.id} className="coin-container">
+            <h2>{coin.name}</h2>
+            </div>
+        ))}
       </div>
     </div>
   );
