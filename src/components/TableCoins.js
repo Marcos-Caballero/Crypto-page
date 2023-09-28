@@ -2,7 +2,7 @@ import React from "react";
 import CoinRow from "./CoinRows";
 
 const headers = ['#', 'Moneda', 'Precio actual', 'Tasa de cambio', 'Volumen ultimas 24h', 'Grafico']
-
+/* Funcion de la barra d busueda */
 const TableCoins = ({ coins, search }) => {
     const filteredCoins = coins.filter(
         (coin) =>
