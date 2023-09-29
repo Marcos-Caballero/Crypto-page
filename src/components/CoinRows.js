@@ -1,6 +1,6 @@
 import React from 'react'
 import StarCheckbox from './StarCheckbox'; /* Trayendo la estrellita */
-import CryptoChart from './CryptoChart.jsx'; /* Trayendo el grafico */
+import CryptoChart from './CryptoChart'; /* Trayendo el grafico */
 
 /* Aqui va la estructura de las filas de la tabla */
 const CoinRow = ({coin, index}) => {
@@ -22,7 +22,7 @@ const CoinRow = ({coin, index}) => {
             </td>
             <td>{coin.total_volume}</td>
             <td>
-                <CryptoChart sparkline={coin.sparkline_in_7d.price} priceChange={coin.price_change_percentage_7d_in_currency}/>
+            <CryptoChart sparklineData={coin.sparkline_in_7d.price} />
             </td>
         </tr>
     )
