@@ -25,8 +25,8 @@ function App() {
   return (
     <div className="container">
       <div className='row'>
-      <h1 className='text-center'>Cripto Mercado v0.7</h1>
-      <input type='text' placeholder='¡Busca tu criptomoneda!' className='form-control bg-dark text-secondary border-0 mt-4 text-center' autoFocus onChange={e => setSearch(e.target.value)}
+      <h1 className='text-center'>Cripto Mercado v1.0</h1>
+      <input type='text' placeholder='¡Busca tu criptomoneda!' className='form-control bg-dark border-0 mt-4 text-center' autoFocus onChange={e => setSearch(e.target.value)} style={{ color: 'white' }}
       />
       <TableCoins coins={coins} search={search} 
       />
